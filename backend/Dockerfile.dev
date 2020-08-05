@@ -1,0 +1,6 @@
+FROM golang:1.14.4 as builder
+
+WORKDIR /app
+RUN go get -u github.com/cosmtrek/air
+
+ENTRYPOINT [ "air" ]
