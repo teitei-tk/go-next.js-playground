@@ -1,0 +1,55 @@
+name: scan
+
+on:
+  schedule:
+    - cron: "0 0 * * *"
+
+  push:
+    branches:
+      - master
+  pull_request:
+
+jobs:
+  backend-scan:
+    name: Backend-Scan
+    runs-on: ubuntu-18.04
+    steps:
+      - name: Setup Go
+        uses: actions/setup-go@v1
+        with:
+          go-version: 1.14
+      - name: Checkout code
+        uses: actions/checkout@v2
+      - name: Build an image from Dockerfile
+        run: |
+          cd backend/ && docker build -t docker.io/teitei-tk/go-next.js-playground/go:${{ github.sha }} .
+      - name: Run vulnerability scanner
+        uses: aquasecurity/trivy-action@0.0.7
+        with:
+          image-ref: "docker.io/teitei-tk/go-next.js-playground/go:${{ github.sha }}"
+          format: "table"
+          exit-code: "1"
+          ignore-unfixed: true
+          severity: "CRITICAL,HIGH"
+
+  js-scan:
+    name: Frontend-Scan
+    runs-on: ubuntu-18.04
+    steps:
+      - name: Setup Node
+        uses: actions/setup-node@v1
+        with:
+          node-version: "12"
+      - name: Checkout code
+        uses: actions/checkout@v2
+      - name: Build an image from Dockerfile
+        run: |
+          cd frontend/ && docker build -f Dockerfile_dev -t docker.io/teitei-tk/go-next.js-playground/js:${{ github.sha }} .
+      - name: Run vulnerability scanner
+        uses: aquasecurity/trivy-action@0.0.7
+        with:
+          image-ref: "docker.io/teitei-tk/go-next.js-playground/js:${{ github.sha }}"
+          format: "table"
+          exit-code: "1"
+          ignore-unfixed: true
+          severity: "CRITICAL,HIGH"
