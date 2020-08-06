@@ -1,6 +1,9 @@
 name: scan
 
 on:
+  schedule:
+    - cron: "0 0 * * *"
+
   push:
     branches:
       - master
