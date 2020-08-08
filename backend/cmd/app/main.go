@@ -15,7 +15,7 @@ func main() {
 	e.Use(middleware.Logger())
 	e.Use(middleware.Recover())
 
-	ip := "127.0.0.1"
+	ip := "0.0.0.0"
 	port := 5000
 	addr := fmt.Sprintf("%s:%d", ip, port)
 	handlers.StartServer(e, addr)

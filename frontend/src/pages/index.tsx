@@ -1,9 +1,9 @@
 import { NextPage } from "next";
 
-const IndexPage = () => {
+const IndexPage: NextPage<{}> = () => {
   return (
     <>
-      <p>hello</p>
+      <p>Hoge</p>
     </>
   );
 };
