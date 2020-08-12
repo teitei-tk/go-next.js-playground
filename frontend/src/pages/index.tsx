@@ -1,6 +1,8 @@
 import { NextPage } from "next";
 import { Container, Divider, Grid, Header, Image } from "semantic-ui-react";
 
+import BlankImage from "@assets/images/blank.png";
+
 const InlineStyle = () => (
   <style>
     {`
@@ -307,14 +309,14 @@ const IndexPage: NextPage<{}> = () => (
       <Grid verticalAlign="middle" columns={4} centered>
         <Grid.Row>
           <Grid.Column>
-            <Image src="/images/wireframe/image.png" />
+            <Image src={BlankImage} />
           </Grid.Column>
           <Grid.Column>
-            <Image src="/images/wireframe/image.png" />
-            <Image src="/images/wireframe/image.png" />
+            <Image src={BlankImage} />
+            <Image src={BlankImage} />
           </Grid.Column>
           <Grid.Column>
-            <Image src="/images/wireframe/image.png" />
+            <Image src={BlankImage} />
           </Grid.Column>
         </Grid.Row>
       </Grid>
