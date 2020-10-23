@@ -2,7 +2,7 @@ name: scan
 
 on:
   schedule:
-    - cron: "0 0 * * *"
+    - cron: "0 0 * * 0"
 
   push:
     branches:
@@ -39,12 +39,12 @@ jobs:
       - name: Setup Node
         uses: actions/setup-node@v1
         with:
-          node-version: "12"
+          node-version: "14"
       - name: Checkout code
         uses: actions/checkout@v2
       - name: Build an image from Dockerfile
         run: |
-          cd frontend/ && docker build -f Dockerfile.dev -t docker.io/teitei-tk/go-next.js-playground/js:${{ github.sha }} .
+          cd frontend/ && docker build -t docker.io/teitei-tk/go-next.js-playground/js:${{ github.sha }} .
       - name: Run vulnerability scanner
         uses: aquasecurity/trivy-action@0.0.7
         with:

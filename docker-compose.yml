@@ -12,9 +12,10 @@ services:
   front:
     build:
       context: "./frontend"
-      dockerfile: "Dockerfile.dev"
+      target: base
+    command: "yarn dev"
     ports:
       - 3000:3000
     volumes:
-      - ./frontend:/app/js
-      - ./frontend/node_modules:/app/js/node_modules
+      - ./frontend:/app/js/src
+      - ./frontend/node_modules:/app/js/src/node_modules
