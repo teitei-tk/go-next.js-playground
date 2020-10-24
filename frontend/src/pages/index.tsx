@@ -3,13 +3,7 @@ import Link from "next/link";
 import { Container, Header, Item } from "semantic-ui-react";
 
 import BlankImage from "@assets/images/blank.png";
-import { ArticleRepository } from "@repositories/article";
-
-type ArtcileProps = {
-  id: number;
-  title: string;
-  content: string;
-};
+import { ArticleRepository, ArtcileProps } from "@repositories/article";
 
 type IndexProps = {
   articles: ArtcileProps[];

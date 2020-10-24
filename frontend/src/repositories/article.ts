@@ -3,7 +3,7 @@ const description = [
   "tiny stature, and even others for their massive size.",
 ].join(" ");
 
-type ArtcileProps = {
+export type ArtcileProps = {
   id: number;
   title: string;
   content: string;
@@ -58,11 +58,15 @@ export class ArticleRepository {
     });
   }
 
-  public findAll() {
+  findAll() {
     const ret = this.rows.map((article) => {
       return article.toJSON();
     });
 
     return ret;
+  }
+
+  find(id: number) {
+    return this.rows.find((article) => article.id == id);
   }
 }
