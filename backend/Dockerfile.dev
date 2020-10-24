@@ -1,7 +1,0 @@
-FROM golang:1.14.4 as builder
-
-RUN mkdir -p /app/go
-WORKDIR /app/go
-RUN go get -u github.com/cosmtrek/air
-
-ENTRYPOINT [ "air" ]

@@ -3,11 +3,12 @@ services:
   api:
     build:
       context: "./backend"
-      dockerfile: "Dockerfile.dev"
+      target: base
+    command: "air -c .air.toml"
     ports:
       - 5000:5000
     volumes:
-      - ./backend:/app/go
+      - ./backend:/app/go/base
 
   front:
     build:
