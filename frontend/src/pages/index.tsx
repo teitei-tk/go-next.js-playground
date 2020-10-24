@@ -3,6 +3,7 @@ import Link from "next/link";
 import { Container, Header, Item } from "semantic-ui-react";
 
 import BlankImage from "@assets/images/blank.png";
+import { ArticleRepository } from "@repositories/article";
 
 type ArtcileProps = {
   id: number;
@@ -14,15 +15,6 @@ type IndexProps = {
   articles: ArtcileProps[];
 };
 
-const ArticleList: NextPage<ArtcileProps> = (props: ArtcileProps) => {
-  return (
-    <Item>
-      <Item.Image size="small" src={BlankImage} />
-      <Item.Content header={props.title} description={props.content} />
-    </Item>
-  );
-};
-
 const IndexPage: NextPage<IndexProps> = (props: IndexProps) => (
   <Container text>
     <Header as="h1" dividing>
@@ -32,8 +24,8 @@ const IndexPage: NextPage<IndexProps> = (props: IndexProps) => (
     <Item.Group>
       {props.articles.map((article, index: number) => {
         return (
-          <Link href={`articles/${article.id}`}>
-            <Item key={index}>
+          <Link href={`articles/${article.id}`} key={index}>
+            <Item>
               <Item.Image size="tiny" src={BlankImage} />
               <Item.Content verticalAlign="middle">
                 <Item.Header>{article.title}</Item.Header>
@@ -47,28 +39,13 @@ const IndexPage: NextPage<IndexProps> = (props: IndexProps) => (
 );
 
 export const getStaticProps: GetStaticProps = async (_) => {
-  const description = [
-    "Cute dogs come in a variety of shapes and sizes. Some cute dogs are cute for their adorable faces, others for their",
-    "tiny stature, and even others for their massive size.",
-  ].join(" ");
-
-  const staticData: IndexProps = {
-    articles: [
-      {
-        id: 1,
-        title: "test",
-        content: description,
-      },
-      {
-        id: 1,
-        title: "test 2",
-        content: description,
-      },
-    ],
-  };
+  const articleRepo = new ArticleRepository();
+  const ret = articleRepo.findAll();
 
   return {
-    props: staticData,
+    props: {
+      articles: ret,
+    },
   };
 };
 

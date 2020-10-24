@@ -16,7 +16,8 @@
     "typeRoots": ["node_modules/@types", "./src/types"],
     "baseUrl": ".",
     "paths": {
-      "@assets/images/*": ["./src/assets/images/*"]
+      "@assets/images/*": ["./src/assets/images/*"],
+      "@repositories/*": ["./src/repositories/*"]
     }
   },
   "exclude": ["node_modules"],
