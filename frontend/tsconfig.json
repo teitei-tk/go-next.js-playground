@@ -17,7 +17,8 @@
     "baseUrl": ".",
     "paths": {
       "@assets/images/*": ["./src/assets/images/*"],
-      "@repositories/*": ["./src/repositories/*"]
+      "@repositories/*": ["./src/repositories/*"],
+      "@components/*": ["./src/components/*"]
     }
   },
   "exclude": ["node_modules"],

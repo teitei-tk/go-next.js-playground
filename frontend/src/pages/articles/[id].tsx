@@ -1,14 +1,17 @@
 import { NextPage, GetStaticProps, GetStaticPaths } from "next";
-import { Container, Header, Item } from "semantic-ui-react";
+import { Container, Header } from "semantic-ui-react";
 
 import { ArtcileProps, ArticleRepository } from "@repositories/article";
+import Layout from "@components/layout";
 
 const Artcile: NextPage<ArtcileProps> = (props) => {
   return (
-    <Container text>
-      <Header as="h1">{props.title}</Header>
-      <p>{props.content}</p>
-    </Container>
+    <Layout>
+      <Container>
+        <Header as="h2">{props.title}</Header>
+        <p>{props.content}</p>
+      </Container>
+    </Layout>
   );
 };
 
