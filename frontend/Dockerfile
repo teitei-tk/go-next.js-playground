@@ -17,16 +17,12 @@ WORKDIR /app/js/builder
 COPY --from=base /app/js/base /app/js/builder
 RUN ["yarn", "build"]
 
-FROM node:14-alpine as production
+FROM nginx:latest as production
 
-ENV NODE_ENV=production
 WORKDIR /app/js/src
 
-COPY --from=builder /app/js/builder/package.json /app/js/builder/yarn.lock ./
-COPY --from=builder /app/js/builder/.next ./.next
-COPY --from=builder /app/js/builder/public ./public
-RUN ["yarn", "install", "--production"]
+RUN rm -rf /etc/nginx/conf.d
+ADD conf/nginx/conf.d /etc/nginx/conf.d
+COPY --from=builder /app/js/builder/out ./out
 
-EXPOSE 3000
-
-CMD [ "yarn", "start" ]
+EXPOSE 80
