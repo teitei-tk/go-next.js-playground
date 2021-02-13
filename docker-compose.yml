@@ -9,6 +9,8 @@ services:
       - 5000:5000
     volumes:
       - ./backend:/app/go/base
+    env_file:
+      - ./backend/server.env
 
   front:
     build:
